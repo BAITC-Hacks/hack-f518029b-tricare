@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>EKT AI — Электрокомплект</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ==========================================
+     TOP BAR
+========================================== -->
+
+<div class="topbar">
+
+    <div class="topbar-inner">
+
+        <button
+            class="city-selector"
+            id="citySelector"
+            type="button"
+        >
+            <span>⌖</span>
+
+            <span id="currentCity">
+                Алматы
+            </span>
+
+            <span class="city-arrow">
+                ▾
+            </span>
+        </button>
+
+
+        <nav class="topbar-nav">
+
+            <a
+                href="#"
+                data-i18n="personalAccount"
+            >
+                Личный кабинет
+            </a>
+
+            <a href="#">
+                B2B - EKT PRO
+            </a>
+
+            <a
+                href="#"
+                data-i18n="buyers"
+            >
+                Покупателям
+            </a>
+
+            <a
+                href="#"
+                data-i18n="request"
+            >
+                Оставить заявку
+            </a>
+
+        </nav>
+
+
+        <div class="topbar-right">
+
+            <button
+                class="top-language"
+                id="topLanguageButton"
+                type="button"
+            >
+                ҚАЗ
+            </button>
+
+
+            <div class="phones">
+
+                <span>☎</span>
+
+                <div>
+                    <div>
+                        +7 (727) 346-88-88
+                    </div>
+
+                    <div>
+                        +7 (778) 046-88-88
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ==========================================
+     MAIN HEADER
+========================================== -->
+
+<header class="main-header">
+
+    <div class="main-header-inner">
+
+        <a
+            class="ekt-logo"
+            href="#"
+        >
+            <span class="logo-small">
+                ГРУППА КОМПАНИЙ
+            </span>
+
+            <span class="logo-main">
+                ЭЛЕКТРОКОМПЛЕКТ
+            </span>
+        </a>
+
+
+        <button
+            class="catalog-button"
+            type="button"
+        >
+            <span data-i18n="catalog">
+                Каталог
+            </span>
+
+            <span class="catalog-icon">
+                ☰
+            </span>
+        </button>
+
+
+        <div class="site-search">
+
+            <span class="search-icon">
+                ⌕
+            </span>
+
+            <input
+                type="text"
+                data-i18n-placeholder="siteSearch"
+                placeholder="Поиск"
+            >
+
+            <span class="search-extra">
+                ◉
+            </span>
+
+        </div>
+
+
+        <div class="header-links">
+
+            <button type="button">
+
+                ⇅
+
+                <span data-i18n="compare">
+                    Сравнить
+                </span>
+
+            </button>
+
+
+            <button type="button">
+
+                ♡
+
+                <span data-i18n="favorites">
+                    Избранное
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                id="cartButton"
+            >
+
+                🛒
+
+                <span data-i18n="cart">
+                    Корзина
+                </span>
+
+                <span
+                    class="cart-count"
+                    id="cartCount"
+                >
+                    0
+                </span>
+
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- ==========================================
+     CITY MODAL
+========================================== -->
+
+<div
+    class="city-overlay hidden"
+    id="cityOverlay"
+>
+
+    <div class="city-modal">
+
+        <button
+            class="city-modal-close"
+            id="cityModalClose"
+            type="button"
+        >
+            ×
+        </button>
+
+
+        <h2>
+
+            <span data-i18n="yourCity">
+                Ваш город:
+            </span>
+
+            <span id="cityModalCurrent">
+                Алматы
+            </span>
+
+        </h2>
+
+
+        <p data-i18n="selectCity">
+            Неправильно определили?
+            Выберите из списка:
+        </p>
+
+
+        <div class="city-grid">
+
+            <button
+                class="city-option"
+                data-city="Алматы"
+                type="button"
+            >
+                Алматы
+            </button>
+
+
+            <button
+                class="city-option"
+                data-city="Астана"
+                type="button"
+            >
+                Астана
+            </button>
+
+
+            <button
+                class="city-option"
+                data-city="Шымкент"
+                type="button"
+            >
+                Шымкент
+            </button>
+
+
+            <button
+                class="city-option"
+                data-city="Тараз"
+                type="button"
+            >
+                Тараз
+            </button>
+
+
+            <button
+                class="city-option"
+                data-city="Атырау"
+                type="button"
+            >
+                Атырау
+            </button>
+
+
+            <button
+                class="city-option"
+                data-city="Актау"
+                type="button"
+            >
+                Актау
+            </button>
+
+
+            <button
+                class="city-option"
+                data-city="Караганда"
+                type="button"
+            >
+                Караганда
+            </button>
+
+
+            <button
+                class="city-option"
+                data-city="Талдыкорган"
+                type="button"
+            >
+                Талдыкорган
+            </button>
+
+
+            <button
+                class="city-option"
+                data-city="Усть-Каменогорск"
+                type="button"
+            >
+                Усть-Каменогорск
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ==========================================
+     MAIN
+========================================== -->
+
+<main>
+
+    <!-- HERO -->
+
+    <section class="intro-section">
+
+        <div class="container">
+
+            <div class="intro-badge">
+                EKT AI
+            </div>
+
+
+            <h1 data-i18n="heroTitle">
+                Электротехническая продукция
+            </h1>
+
+
+            <p data-i18n="heroText">
+                Найдите необходимое оборудование
+                в каталоге или воспользуйтесь
+                AI-консультантом EKT.
+            </p>
+
+
+            <button
+                class="ai-search-preview"
+                id="heroAiButton"
+                type="button"
+            >
+
+                <span class="preview-ai-icon">
+                    ✦
+                </span>
+
+                <span data-i18n="askAi">
+                    Спросить EKT AI
+                </span>
+
+                <span class="preview-arrow">
+                    →
+                </span>
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ======================================
+         CATALOG
+    ====================================== -->
+
+    <section class="catalog-section">
+
+        <div class="container">
+
+            <h2 data-i18n="productCatalog">
+                Каталог продукции
+            </h2>
+
+
+            <div class="catalog-grid">
+
+
+                <article class="catalog-card">
+
+                    <div class="catalog-picture">
+                        ⚡
+                    </div>
+
+                    <span data-i18n="catLowVoltage">
+                        Низковольтная аппаратура
+                    </span>
+
+                </article>
+
+
+                <article class="catalog-card">
+
+                    <div class="catalog-picture">
+                        💡
+                    </div>
+
+                    <span data-i18n="catLighting">
+                        Светильники / Лампы
+                    </span>
+
+                </article>
+
+
+                <article class="catalog-card">
+
+                    <div class="catalog-picture">
+                        🔌
+                    </div>
+
+                    <span data-i18n="catSockets">
+                        Розетки / Выключатели / Коробки
+                    </span>
+
+                </article>
+
+
+                <article class="catalog-card">
+
+                    <div class="catalog-picture">
+                        ⚙
+                    </div>
+
+                    <span data-i18n="catAutomation">
+                        Автоматизация
+                    </span>
+
+                </article>
+
+
+                <article class="catalog-card">
+
+                    <div class="catalog-picture">
+                        ▤
+                    </div>
+
+                    <span data-i18n="catPanels">
+                        Шкафы / Щиты
+                    </span>
+
+                </article>
+
+
+                <article class="catalog-card">
+
+                    <div class="catalog-picture">
+                        🛠
+                    </div>
+
+                    <span data-i18n="catTools">
+                        Инструмент / КИП
+                    </span>
+
+                </article>
+
+
+                <article class="catalog-card">
+
+                    <div class="catalog-picture">
+                        ◉
+                    </div>
+
+                    <span data-i18n="catSecurity">
+                        Видеонаблюдение / СКУД
+                    </span>
+
+                </article>
+
+
+                <article class="catalog-card">
+
+                    <div class="catalog-picture">
+                        ▰
+                    </div>
+
+                    <span data-i18n="catCable">
+                        Кабель / Провод
+                    </span>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- ==========================================
+     AI FLOATING BUTTON
+========================================== -->
+
+<button
+    class="ai-launcher"
+    id="aiLauncher"
+    type="button"
+>
+
+    <span class="ai-launcher-symbol">
+        ✦
+    </span>
+
+    <span>
+        EKT AI
+    </span>
+
+</button>
+
+
+<!-- ==========================================
+     AI PANEL
+========================================== -->
+
+<aside
+    class="ai-panel"
+    id="aiPanel"
+    aria-hidden="true"
+>
+
+    <!-- HEADER -->
+
+    <header class="ai-header">
+
+        <div class="ai-header-info">
+
+            <div class="ai-logo">
+                ✦
+            </div>
+
+
+            <div>
+
+                <strong>
+                    EKT AI
+                </strong>
+
+                <small data-i18n="aiConsultant">
+                    AI-консультант
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="ai-header-actions">
+
+            <div class="ai-languages">
+
+                <button
+                    class="language-button active"
+                    data-lang="ru"
+                    type="button"
+                >
+                    RU
+                </button>
+
+
+                <button
+                    class="language-button"
+                    data-lang="kz"
+                    type="button"
+                >
+                    ҚАЗ
+                </button>
+
+            </div>
+
+
+            <button
+                class="close-ai"
+                id="closeAi"
+                type="button"
+                aria-label="Закрыть"
+            >
+                ×
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- MESSAGES -->
+
+    <div
+        class="chat-messages"
+        id="chatMessages"
+    >
+
+        <div class="message assistant-message">
+
+            <div class="message-avatar">
+                AI
+            </div>
+
+
+            <div
+                class="message-bubble"
+                data-i18n="welcome"
+            >
+                Здравствуйте! Я AI-консультант EKT.
+                Помогу подобрать товар по названию,
+                артикулу или характеристикам,
+                проверить наличие, найти аналог
+                и ответить на вопросы о покупке.
+            </div>
+
+        </div>
+
+
+        <!-- QUICK ACTIONS -->
+
+        <div class="quick-actions">
+
+            <button
+                class="quick-action"
+                type="button"
+                data-action="find"
+                data-i18n="quickFind"
+            >
+                🔎 Подобрать товар
+            </button>
+
+
+            <button
+                class="quick-action"
+                type="button"
+                data-action="stock"
+                data-i18n="quickStock"
+            >
+                📦 Проверить наличие
+            </button>
+
+
+            <button
+                class="quick-action"
+                type="button"
+                data-action="analog"
+                data-i18n="quickAnalog"
+            >
+                ⇄ Найти аналог
+            </button>
+
+
+            <button
+                class="quick-action"
+                type="button"
+                data-action="delivery"
+                data-i18n="quickDelivery"
+            >
+                🚚 Доставка и оплата
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- INPUT -->
+
+    <form
+        class="chat-form"
+        id="chatForm"
+    >
+
+        <input
+            id="fileInput"
+            type="file"
+            hidden
+            accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.xls,.xlsx"
+        >
+
+
+        <button
+            class="attach-button"
+            id="attachButton"
+            type="button"
+            title="Прикрепить файл"
+        >
+            📎
+        </button>
+
+
+        <input
+            class="chat-input"
+            id="messageInput"
+            type="text"
+            autocomplete="off"
+            data-i18n-placeholder="chatPlaceholder"
+            placeholder="Спросите о товаре..."
+        >
+
+
+        <button
+            class="send-button"
+            type="submit"
+            aria-label="Отправить"
+        >
+            →
+        </button>
+
+    </form>
+
+
+    <div
+        class="chat-disclaimer"
+        data-i18n="catalogDisclaimer"
+    >
+        Цена и наличие проверяются
+        по каталогу EKT
+    </div>
+
+</aside>
+
+
+<!-- ==========================================
+     CONFIRMATION MODAL
+========================================== -->
+
+<div
+    class="modal-overlay hidden"
+    id="confirmationModal"
+>
+
+    <div class="confirmation-modal">
+
+        <button
+            class="modal-close"
+            id="modalClose"
+            type="button"
+        >
+            ×
+        </button>
+
+
+        <h3 data-i18n="confirmTitle">
+            Добавить в корзину?
+        </h3>
+
+
+        <div
+            id="confirmationContent"
+            class="confirmation-content"
+        ></div>
+
+
+        <div class="modal-buttons">
+
+            <button
+                class="secondary-button"
+                id="cancelAdd"
+                type="button"
+                data-i18n="cancel"
+            >
+                Отмена
+            </button>
+
+
+            <button
+                class="primary-button"
+                id="confirmAdd"
+                type="button"
+                data-i18n="confirm"
+            >
+                Да, добавить
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+{
+  "page": 1,
+  "per_page": 20,
+  "count": 20,
+  "items": [
+    {
+      "id": 45357,
+      "name": "LED STARK 30W 2400Lm d98x180 4000K IP20 MEGALIGHT (20)",
+      "article": "ярп4520",
+      "price": 1810,
+      "image": "https://ekt.kz/upload/iblock/c39/u58k0kbv7koy4uikpznyywf0i5h1my7e/led_stark_30w_2400lm_d98x180_4000k_ip20_megalight_20.jpg",
+      "url": "https://ekt.kz/catalog/spets_predlozhenie/aktsiya_megalight_polnyy_sklad_polnyy_bak/_led_stark_30w_2400lm_d98x180_4000k_ip20_megalight_20/",
+      "url_api_detail": "https://ekt.kz/api/products/detail?id=45357",
+      "offers": []
+    },
+    {
+      "id": 515279,
+      "name": "027004 АВ DRX125 MT 3ф 40А 10ka Legrand (1)",
+      "article": "200300273_",
+      "price": 26930,
+      "image": "https://ekt.kz/upload/iblock/592/ecrd69l3r236hyuttkj4lmnz1euly1a7/027004_av_drx125_mt_3f_40a_10ka_legrand_1.jpg",
+      "url_api_detail": "https://ekt.kz/api/products/detail?id=515279",
+      "offers": []
+    },
+    {
+      "id": 515280,
+      "name": "027005 АВ DRX125 MT 3ф 50А 10ka Legrand (1)",
+      "article": "200300274_",
+      "price": 26930,
+      "image": "https://ekt.kz/upload/iblock/e99/yqvedowbaop1fju39ky9pau7rmv6qj63/027005_av_drx125_mt_3f_50a_10ka_legrand_1.jpg",
+      "url_api_detail": "https://ekt.kz/api/products/detail?id=515280",
+      "offers": []
+    }
+  ]
+}

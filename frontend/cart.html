@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Корзина — EKT AI</title>
+
+    <!-- Используем тот же CSS -->
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <!-- Небольшие стили только страницы корзины -->
+    <style>
+
+        /* ==========================================
+           CART PAGE
+        ========================================== */
+
+        .cart-page {
+            min-height: calc(100vh - 132px);
+
+            padding: 45px 24px 80px;
+
+            background: #f7f9fb;
+        }
+
+
+        .cart-container {
+            width: 100%;
+            max-width: 1180px;
+
+            margin: 0 auto;
+        }
+
+
+        .cart-page-header {
+            margin-bottom: 28px;
+
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+
+        .cart-page-header h1 {
+            margin: 0 0 6px;
+
+            color: #172331;
+
+            font-size: 32px;
+        }
+
+
+        .cart-page-header p {
+            margin: 0;
+
+            color: #788490;
+
+            font-size: 14px;
+        }
+
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+
+            gap: 7px;
+
+            color: #2f7d9d;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            text-decoration: none;
+        }
+
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+
+        /* ==========================================
+           CART LAYOUT
+        ========================================== */
+
+        .cart-layout {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1fr)
+                320px;
+
+            gap: 22px;
+
+            align-items: start;
+        }
+
+
+        .cart-products {
+            display: flex;
+            flex-direction: column;
+
+            gap: 12px;
+        }
+
+
+        /* ==========================================
+           CART ITEM
+        ========================================== */
+
+        .cart-item {
+            padding: 18px;
+
+            display: grid;
+
+            grid-template-columns:
+                105px
+                minmax(0, 1fr)
+                auto;
+
+            gap: 18px;
+
+            align-items: center;
+
+            border: 1px solid #dfe5ea;
+            border-radius: 10px;
+
+            background: white;
+
+            box-shadow:
+                0 4px 14px
+                rgba(20, 45, 70, 0.04);
+        }
+
+
+        .cart-item-image-wrapper {
+            width: 105px;
+            height: 105px;
+
+            display: grid;
+            place-items: center;
+
+            overflow: hidden;
+
+            border: 1px solid #e5e9ec;
+            border-radius: 7px;
+
+            background: white;
+        }
+
+
+        .cart-item-image {
+            width: 100%;
+            height: 100%;
+
+            padding: 7px;
+
+            object-fit: contain;
+        }
+
+
+        .cart-item-placeholder {
+            color: #9ba5ae;
+
+            font-size: 32px;
+        }
+
+
+        .cart-item-info {
+            min-width: 0;
+        }
+
+
+        .cart-item-name {
+            margin: 0 0 7px;
+
+            color: #172331;
+
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+
+        .cart-item-article {
+            margin-bottom: 10px;
+
+            color: #8a949e;
+
+            font-size: 11px;
+        }
+
+
+        .cart-item-price {
+            color: #172331;
+
+            font-size: 19px;
+            font-weight: 750;
+        }
+
+
+        .cart-stock {
+            margin-top: 6px;
+
+            color: #168b4b;
+
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+
+        /* ==========================================
+           CART ITEM ACTIONS
+        ========================================== */
+
+        .cart-item-actions {
+            min-width: 150px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+
+            gap: 12px;
+        }
+
+
+        .cart-quantity {
+            display: flex;
+            align-items: center;
+
+            gap: 5px;
+
+            padding: 4px;
+
+            border: 1px solid #dce3e8;
+            border-radius: 7px;
+
+            background: #f8fafb;
+        }
+
+
+        .cart-quantity-button {
+            width: 32px;
+            height: 32px;
+
+            display: grid;
+            place-items: center;
+
+            padding: 0;
+
+            border: 0;
+            border-radius: 5px;
+
+            background: white;
+            color: #263542;
+
+            font-size: 17px;
+        }
+
+
+        .cart-quantity-button:hover {
+            background: #edf4f7;
+
+            color: #2f7d9d;
+        }
+
+
+        .cart-quantity-button:disabled {
+            opacity: 0.35;
+
+            cursor: not-allowed;
+        }
+
+
+        .cart-quantity-value {
+            min-width: 32px;
+
+            color: #172331;
+
+            text-align: center;
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+
+        .cart-item-total {
+            color: #172331;
+
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+
+        .cart-remove {
+            padding: 0;
+
+            border: 0;
+
+            background: transparent;
+            color: #8b969f;
+
+            font-size: 11px;
+
+            text-decoration: underline;
+        }
+
+
+        .cart-remove:hover {
+            color: #c84036;
+        }
+
+
+        /* ==========================================
+           SUMMARY
+        ========================================== */
+
+        .cart-summary {
+            position: sticky;
+
+            top: 20px;
+
+            padding: 22px;
+
+            border: 1px solid #dfe5ea;
+            border-radius: 10px;
+
+            background: white;
+
+            box-shadow:
+                0 5px 18px
+                rgba(20, 45, 70, 0.05);
+        }
+
+
+        .cart-summary h2 {
+            margin: 0 0 20px;
+
+            color: #172331;
+
+            font-size: 19px;
+        }
+
+
+        .summary-row {
+            margin-bottom: 12px;
+
+            display: flex;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            color: #65717d;
+
+            font-size: 12px;
+        }
+
+
+        .summary-divider {
+            height: 1px;
+
+            margin: 17px 0;
+
+            background: #e5e9ec;
+        }
+
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+
+            gap: 15px;
+        }
+
+
+        .summary-total span {
+            color: #172331;
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+
+        .summary-total strong {
+            color: #172331;
+
+            font-size: 23px;
+        }
+
+
+        .checkout-button {
+            width: 100%;
+            min-height: 46px;
+
+            margin-top: 22px;
+
+            border: 0;
+            border-radius: 6px;
+
+            background: #2f7d9d;
+            color: white;
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+
+        .checkout-button:hover {
+            background: #155b80;
+        }
+
+
+        .checkout-button:disabled {
+            opacity: 0.45;
+
+            cursor: not-allowed;
+        }
+
+
+        .checkout-note {
+            margin-top: 10px;
+
+            color: #939da6;
+
+            text-align: center;
+
+            font-size: 9px;
+            line-height: 1.4;
+        }
+
+
+        /* ==========================================
+           EMPTY CART
+        ========================================== */
+
+        .empty-cart {
+            padding: 70px 25px;
+
+            border: 1px solid #dfe5ea;
+            border-radius: 10px;
+
+            background: white;
+
+            text-align: center;
+        }
+
+
+        .empty-cart-icon {
+            margin-bottom: 17px;
+
+            font-size: 48px;
+        }
+
+
+        .empty-cart h2 {
+            margin: 0 0 9px;
+
+            color: #172331;
+
+            font-size: 21px;
+        }
+
+
+        .empty-cart p {
+            margin: 0 0 22px;
+
+            color: #788490;
+
+            font-size: 13px;
+        }
+
+
+        .empty-cart-link {
+            min-height: 40px;
+
+            padding: 0 18px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 6px;
+
+            background: #2f7d9d;
+            color: white;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            text-decoration: none;
+        }
+
+
+        /* ==========================================
+           NOTIFICATION
+        ========================================== */
+
+        .cart-notification {
+            position: fixed;
+
+            left: 50%;
+            bottom: 25px;
+
+            z-index: 500;
+
+            max-width: calc(100% - 30px);
+
+            padding: 11px 16px;
+
+            border-radius: 7px;
+
+            background: #172331;
+            color: white;
+
+            box-shadow:
+                0 8px 30px
+                rgba(10, 25, 40, 0.2);
+
+            font-size: 11px;
+
+            transform:
+                translateX(-50%);
+        }
+
+
+        /* ==========================================
+           CART LANGUAGE
+        ========================================== */
+
+        .cart-language {
+            display: flex;
+
+            padding: 2px;
+
+            border: 1px solid #dfe5eb;
+            border-radius: 7px;
+
+            background: #f6f8fa;
+        }
+
+
+        .cart-language-button {
+            padding: 6px 8px;
+
+            border: 0;
+            border-radius: 5px;
+
+            background: transparent;
+            color: #788490;
+
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+
+        .cart-language-button.active {
+            background: white;
+            color: #1765b9;
+
+            box-shadow:
+                0 2px 5px
+                rgba(30, 50, 70, 0.08);
+        }
+
+
+        /* ==========================================
+           RESPONSIVE
+        ========================================== */
+
+        @media (max-width: 900px) {
+
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+
+
+            .cart-summary {
+                position: static;
+            }
+        }
+
+
+        @media (max-width: 650px) {
+
+            .cart-page {
+                padding:
+                    28px
+                    14px
+                    60px;
+            }
+
+
+            .cart-page-header {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+
+            .cart-page-header h1 {
+                font-size: 27px;
+            }
+
+
+            .cart-item {
+                grid-template-columns:
+                    75px
+                    minmax(0, 1fr);
+
+                gap: 12px;
+            }
+
+
+            .cart-item-image-wrapper {
+                width: 75px;
+                height: 75px;
+            }
+
+
+            .cart-item-actions {
+                grid-column:
+                    1 / -1;
+
+                width: 100%;
+
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+
+            .cart-item-name {
+                font-size: 12px;
+            }
+
+
+            .cart-item-price {
+                font-size: 16px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<!-- ==========================================
+     TOP BAR
+========================================== -->
+
+<div class="topbar">
+
+    <div class="topbar-inner">
+
+        <div class="city-selector">
+
+            <span>⌖</span>
+
+            <span id="cartCity">
+                Алматы
+            </span>
+
+        </div>
+
+
+        <nav class="topbar-nav">
+
+            <a
+                href="#"
+                data-cart-i18n="personalAccount"
+            >
+                Личный кабинет
+            </a>
+
+            <a href="#">
+                B2B - EKT PRO
+            </a>
+
+            <a
+                href="#"
+                data-cart-i18n="buyers"
+            >
+                Покупателям
+            </a>
+
+            <a
+                href="#"
+                data-cart-i18n="request"
+            >
+                Оставить заявку
+            </a>
+
+        </nav>
+
+
+        <div class="topbar-right">
+
+            <div class="phones">
+
+                <span>☎</span>
+
+                <div>
+                    <div>
+                        +7 (727) 346-88-88
+                    </div>
+
+                    <div>
+                        +7 (778) 046-88-88
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ==========================================
+     HEADER
+========================================== -->
+
+<header class="main-header">
+
+    <div class="main-header-inner">
+
+        <a
+            class="ekt-logo"
+            href="index.html"
+        >
+            <span class="logo-small">
+                ГРУППА КОМПАНИЙ
+            </span>
+
+            <span class="logo-main">
+                ЭЛЕКТРОКОМПЛЕКТ
+            </span>
+        </a>
+
+
+        <a
+            class="catalog-button"
+            href="index.html"
+            style="text-decoration: none;"
+        >
+            <span data-cart-i18n="catalog">
+                Каталог
+            </span>
+
+            <span class="catalog-icon">
+                ☰
+            </span>
+        </a>
+
+
+        <div style="flex: 1;"></div>
+
+
+        <div class="cart-language">
+
+            <button
+                class="cart-language-button active"
+                data-lang="ru"
+                type="button"
+            >
+                RU
+            </button>
+
+            <button
+                class="cart-language-button"
+                data-lang="kz"
+                type="button"
+            >
+                ҚАЗ
+            </button>
+
+        </div>
+
+
+        <div
+            style="
+                font-size: 13px;
+                font-weight: 600;
+            "
+        >
+            🛒
+
+            <span data-cart-i18n="cart">
+                Корзина
+            </span>
+
+            <strong id="headerCartCount">
+                0
+            </strong>
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- ==========================================
+     CART PAGE
+========================================== -->
+
+<main class="cart-page">
+
+    <div class="cart-container">
+
+        <div class="cart-page-header">
+
+            <div>
+
+                <h1 data-cart-i18n="cart">
+                    Корзина
+                </h1>
+
+                <p
+                    id="cartSubtitle"
+                    data-cart-i18n="subtitle"
+                >
+                    Проверьте товары перед продолжением
+                </p>
+
+            </div>
+
+
+            <a
+                class="back-link"
+                href="index.html"
+            >
+                ←
+
+                <span data-cart-i18n="continueShopping">
+                    Продолжить покупки
+                </span>
+
+            </a>
+
+        </div>
+
+
+        <div
+            class="cart-layout"
+            id="cartLayout"
+        >
+
+            <!-- ITEMS -->
+
+            <section
+                class="cart-products"
+                id="cartProducts"
+            ></section>
+
+
+            <!-- SUMMARY -->
+
+            <aside
+                class="cart-summary"
+                id="cartSummary"
+            >
+
+                <h2 data-cart-i18n="order">
+                    Ваш заказ
+                </h2>
+
+
+                <div class="summary-row">
+
+                    <span data-cart-i18n="products">
+                        Товары
+                    </span>
+
+                    <strong id="summaryItems">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span data-cart-i18n="subtotal">
+                        Стоимость товаров
+                    </span>
+
+                    <strong id="summarySubtotal">
+                        0 ₸
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-divider"></div>
+
+
+                <div class="summary-total">
+
+                    <span data-cart-i18n="total">
+                        Итого
+                    </span>
+
+                    <strong id="summaryTotal">
+                        0 ₸
+                    </strong>
+
+                </div>
+
+
+                <button
+                    class="checkout-button"
+                    id="checkoutButton"
+                    type="button"
+                    data-cart-i18n="checkout"
+                >
+                    Перейти к оформлению
+                </button>
+
+
+                <div
+                    class="checkout-note"
+                    data-cart-i18n="prototype"
+                >
+                    Оформление заказа не входит
+                    в текущий прототип
+                </div>
+
+            </aside>
+
+        </div>
+
+
+        <!-- EMPTY STATE -->
+
+        <section
+            class="empty-cart hidden"
+            id="emptyCart"
+        >
+
+            <div class="empty-cart-icon">
+                🛒
+            </div>
+
+
+            <h2 data-cart-i18n="emptyTitle">
+                Корзина пуста
+            </h2>
+
+
+            <p data-cart-i18n="emptyText">
+                Добавьте товар через каталог
+                или EKT AI
+            </p>
+
+
+            <a
+                class="empty-cart-link"
+                href="index.html"
+                data-cart-i18n="goCatalog"
+            >
+                Перейти к каталогу
+            </a>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<script src="cart.js"></script>
+
+</body>
+
+</html>
